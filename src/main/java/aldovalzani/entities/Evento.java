@@ -22,12 +22,15 @@ public abstract class Evento {
     private TipoEvento tipoEvento;
     @Column(name = "numero_max_partecipanti")
     private int numeroMassimoParticipanti;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     public Evento() {
     }
 
-    public Evento(LocalDate dataEvento, String titolo, TipoEvento tipoEvento, int numeroMassimoParticipanti, String descrizione) {
-        this.dataEvento = dataEvento;
+    public Evento(String titolo, TipoEvento tipoEvento, int numeroMassimoParticipanti, String descrizione) {
+        this.dataEvento = LocalDate.now();
         this.titolo = titolo;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoParticipanti = numeroMassimoParticipanti;

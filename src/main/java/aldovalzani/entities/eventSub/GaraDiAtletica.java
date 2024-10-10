@@ -3,18 +3,19 @@ package aldovalzani.entities.eventSub;
 import aldovalzani.entities.Evento;
 import aldovalzani.entities.Persona;
 import aldovalzani.entities.TipoEvento;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "gare_di_atletica")
+@Table(name = "gare")
 public class GaraDiAtletica extends Evento {
+    @ManyToMany
+    @JoinTable(name = "gara_persona", joinColumns = @JoinColumn(name = "gara_id"), inverseJoinColumns = @JoinColumn(name = "persona_id"))
     @Column(nullable = false)
     private Set<Persona> atleti;
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "vincitore_id")
     private Persona vincitore;
 
     public GaraDiAtletica() {
